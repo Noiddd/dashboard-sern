@@ -1,5 +1,10 @@
 import React from "react";
+import UserRegisterForm from "../../components/register/UserRegisterForm";
 
 export default function Register() {
-  return <div>Register</div>;
+  return (
+    <div>
+      <UserRegisterForm />
+    </div>
+  );
 }

@@ -1,5 +1,14 @@
-import React from "react";
+import Link from "next/link";
+import { cn } from "@/lib/utils";
+import { buttonVariants } from "@/components/ui/button";
+import UserLoginForm from "@/components/login/UserLoginForm";
 
-export default function Login() {
-  return <div>Login</div>;
-}
+const LoginForm = () => {
+  return (
+    <div>
+      <UserLoginForm />
+    </div>
+  );
+};
+
+export default LoginForm;
