@@ -38,8 +38,7 @@ export default function UserLoginForm({ className, ...props }) {
 
       supabaseClient.auth.onAuthStateChange((event, session) => {
         if (event == "SIGNED_IN") {
-          console.log("WE ARE IN");
-          console.log(data);
+          router.push("/dashboard");
         }
       });
     } catch (error) {
@@ -47,22 +46,43 @@ export default function UserLoginForm({ className, ...props }) {
     }
   };
 
-  //const { data:userData, error:sessionError } = await supabase.auth.getSession()
-
-  // Check if there is a user
-  // useEffect(() => {
-  //   if (user) {
-  //     router.push("/chat");
-  //   }
-  // }, [user]);
+  // if user comes into login with a session already running, will redirect to dashboard
+  useEffect(() => {
+    supabaseClient.auth.onAuthStateChange((event, session) => {
+      if (event == "SIGNED_IN") {
+        router.push("/dashboard");
+      }
+    });
+  }, []);
 
   return (
     <div>
       <form onSubmit={onSubmit}>
         <Label htmlFor="email">Email address</Label>
-        <Input type="email" id="email" placeholder="Email" />
+        <Input
+          className="rounded"
+          id="email"
+          placeholder="Email"
+          type="email"
+          autoCapitalize="none"
+          autoComplete="email"
+          autoCorrect="off"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
         <Label htmlFor="password">Password</Label>
-        <Input type="password" id="password" placeholder="Password" />
+        <Input
+          className="rounded"
+          id="password"
+          placeholder="Password"
+          type="password"
+          autoCapitalize="none"
+          autoComplete="password"
+          autoCorrect="off"
+          disabled={isLoading}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
         <Button>Submit</Button>
       </form>
     </div>

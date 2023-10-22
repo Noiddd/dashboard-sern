@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { useRouter } from "next/navigation";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
 import { Button } from "@/components/ui/button";
@@ -17,7 +16,6 @@ export default function UserRegisterForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const router = useRouter();
   const supabaseClient = createClientComponentClient();
 
   const onSubmit = async (e) => {
@@ -30,7 +28,7 @@ export default function UserRegisterForm() {
         email,
         password,
         options: {
-          emailRedirectTo: `${location.origin}/auth/sign-up`,
+          emailRedirectTo: `${location.origin}/api/auth/signup`,
         },
       });
 
